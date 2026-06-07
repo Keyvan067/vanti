@@ -1,0 +1,24 @@
+{
+  "name": "keyvan067/vanti",
+  "description": "A modular OOP-based WooCommerce theme with Elementor integration",
+  "type": "wordpress-theme",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Keyvan067",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "VANTI\\": "app/",
+      "VANTI\\Helpers\\": "app/Helpers/",
+      "VANTI\\Assets\\": "app/Assets/",
+      "VANTI\\WooCommerce\\": "app/WooCommerce/",
+      "VANTI\\Admin\\": "app/Admin/"
+    }
+  }
+}
