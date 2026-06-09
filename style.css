@@ -1,17 +1,15 @@
 /*
 Theme Name: VANTI
 Theme URI: https://github.com/Keyvan067/VANTI
-Description: A modular OOP-based WooCommerce theme with Elementor integration
-Version: 1.0.0
 Author: Keyvan067
 Author URI: https://github.com/Keyvan067
+Description: A modular, OOP-based WooCommerce theme with Elementor integration, built with PSR-4 autoloading and modern PHP practices.
+Version: 1.0.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: vanti
-Domain Path: /languages
-Requires at least: 5.9
+Tags: woo-commerce, elementor, modular, responsive, tailwind, alpinejs
 Requires PHP: 7.4
-Tags: woocommerce, elementor, ecommerce
 */
 
-/* Theme styles will be loaded via Assets module */
+@import url("public/build/app.css"); /* Load the built Tailwind CSS */

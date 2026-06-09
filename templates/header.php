@@ -30,6 +30,9 @@ echo '<!DOCTYPE html>';
 						<?php bloginfo( 'name' ); ?>
 					</a>
 				</h1>
+                <div class="vanti-component">
+                    <?php include VANTI_PATH . '/resources/components/Button.html'; ?>
+                </div>
 			</div>
 		</div>
 	</header>

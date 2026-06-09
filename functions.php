@@ -24,6 +24,21 @@ if (file_exists(VANTI_PATH . '/vendor/autoload.php')) {
 
 /*
 |--------------------------------------------------------------------------
+| Err Handler
+|--------------------------------------------------------------------------
+*/
+
+set_error_handler(function ($errno, $errstr, $errfile, $errline) {
+    error_log("[VANTI PHP ERROR] $errstr in $errfile:$errline");
+    return true; // جلوگیری از crash
+});
+
+set_exception_handler(function ($e) {
+    error_log("[VANTI EXCEPTION] " . $e->getMessage());
+});
+
+/*
+|--------------------------------------------------------------------------
 | Bootstrap
 |--------------------------------------------------------------------------
 */

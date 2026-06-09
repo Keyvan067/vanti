@@ -1,34 +1,45 @@
 <?php
 
-namespace VANTI\Assets;
+namespace VANTI\Admin;
 
 class AssetManager
 {
+    protected string $manifest;
+
     public function __construct()
     {
-        add_action(
-            'wp_enqueue_scripts',
-            [$this, 'enqueueFrontend']
-        );
+        // مسیر فایل manifest که Vite خروجی می‌دهد
+        $manifestPath = VANTI_PATH . '/dist/manifest.json';
 
-        add_action(
-            'admin_enqueue_scripts',
-            [$this, 'enqueueAdmin']
-        );
+        if (file_exists($manifestPath)) {
+            $this->manifest = json_decode(file_get_contents($manifestPath), true);
+        } else {
+            $this->manifest = [];
+        }
+
+        add_action('wp_enqueue_scripts', [$this, 'enqueueFrontend']);
+        add_action('admin_enqueue_scripts', [$this, 'enqueueAdmin']);
+    }
+
+    public function asset(string $key): string
+    {
+        return isset($this->manifest[$key])
+            ? VANTI_URL . '/dist/' . $this->manifest[$key]['file']
+            : '';
     }
 
     public function enqueueFrontend(): void
     {
         wp_enqueue_style(
             'vanti-main',
-            VANTI_URL . '/public/css/main.css',
+            $this->asset('resources/css/app.css'),
             [],
             VANTI_VERSION
         );
 
         wp_enqueue_script(
             'vanti-main',
-            VANTI_URL . '/public/js/main.js',
+            $this->asset('resources/js/app.js'),
             [],
             VANTI_VERSION,
             true
