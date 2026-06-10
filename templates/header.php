@@ -27,7 +27,7 @@
             <div id="collapsed-view"
                  class="w-full h-full flex items-center justify-between pl-14 pr-8 airbnb-timing opacity-100">
                 <div class="flex items-center text-xs font-bold text-base-content w-full justify-start gap-4">
-                    <span class="text-base-content font-bold truncate">دسته بندی کالاها</span>
+                    <span class="text-base-content font-medium truncate">دسته بندی کالاها</span>
                     <span class="search-divider w-[1px] h-3 bg-gray-200 shrink-0"></span>
                     <span class="text-gray-500 font-medium truncate">شگفت انگیز ها</span>
                     <span class="search-divider w-[1px] h-3 bg-gray-200 shrink-0"></span>
@@ -45,7 +45,7 @@
                 <div data-section="main-category"
                      class="search-section text-center flex-auto h-full rounded-full flex flex-col justify-center pl-6 pr-6 relative airbnb-timing">
                     <div class="relative z-20 pointer-events-none">
-                        <span class="block text-[10px] text-nowrap tracking-wide text-base-content select-none">دنبال چی میگردی؟</span>
+                        <span class="block text-xs truncate text-base-content">دنبال چی میگردی؟</span>
                     </div>
                     <div class="section-divider !z-[5] absolute right-0 top-1/4 bottom-1/4 w-[1px] bg-base-300 airbnb-timing"></div>
                 </div>
@@ -53,7 +53,7 @@
                 <div data-section="checkin-amazing"
                      class="search-section text-center flex-auto h-full rounded-full flex flex-col justify-center pl-6 pr-6 relative airbnb-timing">
                     <div class="relative z-20 pointer-events-none">
-                        <span class="block text-[10px] text-nowrap tracking-wide text-base-content select-none">دنبال چی میگردی؟</span>
+                        <span class="block text-xs truncate text-base-content">دنبال چی میگردی؟</span>
                     </div>
                     <div class="section-divider !z-[5] absolute right-0 top-1/4 bottom-1/4 w-[1px] bg-base-300 airbnb-timing"></div>
                 </div>
@@ -61,7 +61,7 @@
                 <div data-section="top-searching"
                      class="search-section text-center flex-auto h-full rounded-full flex flex-col justify-center pl-6 pr-6 relative airbnb-timing">
                     <div class="relative z-20 pointer-events-none">
-                        <span class="block text-[10px] text-nowrap tracking-wide text-base-content select-none">دنبال چی میگردی؟</span>
+                        <span class="block text-xs truncate text-base-content">دنبال چی میگردی؟</span>
                     </div>
                     <div class="section-divider !z-[5] absolute right-0 top-1/4 bottom-1/4 w-[1px] bg-base-300 airbnb-timing"></div>
                 </div>
@@ -202,14 +202,21 @@
                 onComplete: () => {
                     const firstTab = document.querySelector('[data-section="main-category"]');
                     if (firstTab) {
-                        // ۱. اضافه کردن کلاس اکتیو به تب اول در اولین کلیک
+                        // ۱. اضافه کردن کلاس اکتیو به تب اول
                         firstTab.classList.add('is-active');
 
-                        // ۲. اجرای انیمیشن استایل‌های تب اول
-                        activateTabWithGSAP(firstTab);
+                        // ۲. قرارگیری آنی اندیکاتور روی تب اول (بدون انیمیشن برای لود اول: false)
+                        moveActiveIndicator(firstTab, false);
+
+                        // ۳. باز شدن دراپ‌داون متناسب با تب اول
+                        activateTabDropdownBox(firstTab);
+
+                        // ۴. تنظیم خطوط جداکننده
+                        updateDividersVisibility();
                     }
                 }
             });
+
             activeTimeline = tl;
 
             gsap.set(expandedView, {display: 'flex'});
@@ -250,8 +257,6 @@
                     ease: "power2.out"
                 }, 0.15)
                 .to(bgOverlay, {duration: 0.35, opacity: 1, pointerEvents: "auto", ease: "power2.out"}, 0);
-
-            updateDividersVisibility();
         }
 
         // ۲. انیمیشن بسته شدن منو
@@ -470,7 +475,7 @@
             }
         });
 
-// ۵. مدیریت کلیک، هاور و خطوط جداکننده تب‌ها به سبک Airbnb
+        // ۵. مدیریت کلیک، هاور و خطوط جداکننده تب‌ها به سبک Airbnb
         searchSections.forEach(section => {
 
             // الف) رویداد کلیک (افزودن کلاس وضعیت فعال)
@@ -513,7 +518,7 @@
 
         });
 
-// تابع مرکزی برای مدیریت پنهان/آشکار شدن خطوط جداکننده اطراف تب فعال و هاور شده
+        // تابع مرکزی برای مدیریت پنهان/آشکار شدن خطوط جداکننده اطراف تب فعال و هاور شده
         function updateDividersVisibility() {
             searchSections.forEach(sec => {
                 const divider = sec.querySelector('.section-divider');
@@ -531,5 +536,3 @@
         gsap.from(searchBar, {duration: 0.4, y: -15, opacity: 0, ease: airbnbEase, delay: 0.2});
     });
 </script>
-</body>
-</html>
