@@ -12,7 +12,7 @@ class Manager
         add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_assets']);
     }
 
-    public function enqueue_frontend_assets()
+    public function enqueue_frontend_assets(): void
     {
         // DEV MODE
         if (defined('VANTI_VITE_DEV') && VANTI_DEV) {
@@ -53,7 +53,7 @@ class Manager
         );
     }
 
-    public function enqueue_admin_assets()
+    public function enqueue_admin_assets(): void
     {
 
         wp_enqueue_style(

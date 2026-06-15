@@ -1,3 +1,14 @@
+<?php
+/**
+ * Header template - Search Block
+ *
+ * @package VANTI
+ */
+
+use VANTI\View\View;
+
+?>
+
 <div id="searchBarWarper" class="max-w-6xl origin-center mx-auto px-6 relative flex flex-col items-center">
     <div id="search-bar"
          class="relative w-md h-[48px] select-none bg-white border border-accent/50 rounded-full shadow-sm hover:shadow-md cursor-pointer airbnb-timing flex items-center overflow-hidden">
@@ -61,39 +72,7 @@
     <div id="search-dropdown-box"
          class="absolute min-h-40 h-[calc(100% - 180px)] top-20 w-full max-w-xl bg-white border border-accent/50 rounded-[32px] p-6 shadow-[0_24px_48px_rgba(0,0,0,0.1)] opacity-0 scale-95 pointer-events-none z-50 overflow-hidden transition-all duration-200">
         <div id="p_1" class="hidden">
-            <div class="breadcrumbs flex items-center gap-2">
-                <ul class="text-xs text-accent">
-                    <li class="text-lg font-bold text-base-content">دسته‌بندی کالاها</li>
-                    <li><a>Documents</a></li>
-                    <li>Add Document</li>
-                </ul>
-            </div>
-            <div class="grid grid-cols-1 gap-4">
-                <a href="#" class="flex flex-row items-center gap-4 hover:bg-gray-50 rounded-xl p-2">
-                    <!-- <img src="category-cover" alt="">-->
-                    <span class="w-14 h-14 rounded-xl bg-blue-50 p-1 text-xl text-sky-500 flex items-center justify-center font-bold">DJ</span>
-                    <div class="flex-1 items-start gap-2 flex-col w-fit grow">
-                        <div class="text-base font-bold text-base-content">کالای دیجیتال</div>
-                        <span class="text-xs text-accent">کالاهای دیجیتال،وسایل گیمینگ، پاوربانک،...</span>
-                    </div>
-                </a>
-                <a href="#" class="flex flex-row items-center gap-4 hover:bg-gray-50 rounded-xl p-2">
-                    <!-- <img src="category-cover" alt="">-->
-                    <span class="w-14 h-14 rounded-xl bg-yellow-50 p-1 text-xl text-yellow-500 flex items-center justify-center font-bold">MB</span>
-                    <div class="flex-1 items-start gap-2 flex-col w-fit grow">
-                        <div class="text-base font-bold text-base-content">موبایل</div>
-                        <span class="text-xs text-accent">اپل، سامسونگ، ریلمی، شیائومی، هواوی،...</span>
-                    </div>
-                </a>
-                <a href="#" class="flex flex-row items-center gap-4 hover:bg-gray-50 rounded-xl p-2">
-                    <!-- <img src="category-cover" alt="">-->
-                    <span class="w-14 h-14 rounded-xl bg-emerald-50 p-1 text-xl text-emerald-500 flex items-center justify-center font-bold">MB</span>
-                    <div class="flex-1 items-start gap-2 flex-col w-fit grow">
-                        <div class="text-base font-bold text-base-content">لپتاپ</div>
-                        <span class="text-xs text-accent">مکبوک، سرفیس، ایسوس، شیائومی، لنوو، هواوی،...</span>
-                    </div>
-                </a>
-            </div>
+            <?php View::render('components.mega-menu.categories'); ?>
         </div>
         <div id="p_2" class="hidden">
             <h4 class="text-lg font-normal text-gray-900 mb-4"> تخفیف‌ها </h4>

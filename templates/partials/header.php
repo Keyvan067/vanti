@@ -40,4 +40,4 @@ use VANTI\View\View;
     </div>
 </header>
 
-<?php View::render('components.mega-menu.categories'); ?>
+

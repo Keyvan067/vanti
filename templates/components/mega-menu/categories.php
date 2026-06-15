@@ -6,11 +6,8 @@ $categoriesJson = MegaMenu::getCategoriesJson();
 
 ?>
 
-<div
-        x-data="megaMenu()"
-        x-init="init()"
-        class="relative"
->
+
+<div x-data="megaMenu">
 
     <!-- Trigger -->
     <button
@@ -50,10 +47,6 @@ $categoriesJson = MegaMenu::getCategoriesJson();
                             </span>
                         </span>
                     </template>
-                    <span
-                            class="font-bold text-black"
-                            x-text="title"
-                    ></span>
                 </div>
             </div>
             <!-- Back Button -->
@@ -75,7 +68,6 @@ $categoriesJson = MegaMenu::getCategoriesJson();
         <!-- LIST -->
         <div class="max-h-[420px] grid grid-cols-1 gap-4 overflow-y-auto">
             <template x-for="item in currentItems" :key="item.id">
-
                 <button
                         @click="select(item)"
                         class="flex flex-row items-center gap-4 hover:bg-gray-50 rounded-xl p-2 transition"
@@ -101,82 +93,20 @@ $categoriesJson = MegaMenu::getCategoriesJson();
                     </span>
 
                 </button>
-
                 <div class="flex-1 items-start gap-2 flex-col w-fit grow">
                     <div class="text-base font-bold text-base-content">کالای دیجیتال</div>
                     <span class="text-xs text-accent">کالاهای دیجیتال،وسایل گیمینگ، پاوربانک،...</span>
                 </div>
-
-
             </template>
         </div>
 
     </div>
 </div>
 
-<!-- ALPINE -->
 <script>
-    function megaMenu() {
-        return {
-
-            open: false,
-
-            title: 'دسته بندی کالاها',
-
-            stack: [],
-
-            currentItems: [],
-
-            original: [],
-
-            init() {
-                const data = <?php echo $categoriesJson ?: '[]'; ?>;
-
-                this.currentItems = data;
-                this.original = data;
-            },
-
-            select(item) {
-
-                if (!item.children || item.children.length === 0) {
-                    window.location.href = item.url;
-                    return;
-                }
-
-                this.stack.push({
-                    title: this.title,
-                    items: this.currentItems
-                });
-
-                this.currentItems = item.children;
-                this.title = item.name;
-            },
-
-            back() {
-
-                const prev = this.stack.pop();
-
-                if (!prev) return;
-
-                this.currentItems = prev.items;
-                this.title = prev.title;
-            },
-
-            goTo(index) {
-
-                this.stack = this.stack.slice(0, index);
-
-                const last = this.stack[this.stack.length - 1];
-
-                if (!last) {
-                    this.currentItems = this.original;
-                    this.title = 'دسته بندی کالاها';
-                    return;
-                }
-
-                this.currentItems = last.items;
-                this.title = last.title;
-            }
-        }
-    }
+    window.VANTI = window.VANTI || {};
+    window.VANTI.categories = <?php echo \VANTI\WooCommerce\MegaMenu::getCategoriesJson(); ?>;
+    console.log('VANTI:', window.VANTI);
+    console.log('CATS:', window.VANTI?.categories);
 </script>
+
